@@ -64,13 +64,17 @@ export const Content = styled.div`
 
 export const ContentCard = styled.div`
   width: 390px;
-  height: 500px;
+  height: 550px;
   border-right: 1px solid #dddddd;
 
   margin-top: 28px;
 
   padding-left: 32px;
   padding-right: 16px;
+
+  &:nth-last-of-type(1) {
+    border: 0;
+  }
 
   > p {
     color: #999999;
@@ -79,7 +83,7 @@ export const ContentCard = styled.div`
   div {
     display: flex;
     align-items: center;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
 
   h1 {
@@ -132,6 +136,7 @@ export const InputRadio = styled.div`
     cursor: pointer;
     transition: background 0.5s;
     font-size: 24px;
+    border-radius: 100px;
   }
 
   input[type="radio"] {
@@ -157,7 +162,6 @@ export const InfoDiv = styled.div`
 
 export const HeaderOfFooter = styled.div`
   display: flex;
-  margin-top: 45px;
   margin-left: 12px;
   margin-bottom: 122px;
 
@@ -206,7 +210,7 @@ export const HeaderOfFooter = styled.div`
 export const FooterContainer = styled.div`
   width: 100%;
   height: 100%;
-  height: 120px;
+  max-height: 120px;
 
   position: absolute;
   bottom: 0;
