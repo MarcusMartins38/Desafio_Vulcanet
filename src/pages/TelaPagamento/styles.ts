@@ -45,29 +45,14 @@ export const ContentCard = styled.div`
 
   h1 {
     color: #00a6ce;
-    font-size: 30px;
+    font-size: 32px;
     line-height: 36px;
-    font-style: normal;
     margin-top: 24px;
-  }
-
-  button {
-    width: 338px;
-    height: 38px;
-    background: #f4f7fc;
-    border-radius: 100px;
-
-    border: 0;
-    font-weight: bold;
-    font-size: 26px;
-    color: #4a507b;
-
-    margin-top: 12px;
-    margin-bottom: 32px;
+    font-weight: 600;
   }
 
   p {
-    font-size: 15px;
+    font-size: 13px;
   }
 `;
 
@@ -81,6 +66,46 @@ export const TitleDiv = styled.div`
   img {
     margin-right: 20px;
     margin-top: 30px;
+  }
+`;
+
+export const InputRadio = styled.div`
+  position: relative;
+  border: 1px solid black;
+
+  width: 310px;
+  height: 38px;
+  background: #f4f7fc;
+  border-radius: 100px;
+
+  border: 0;
+  font-weight: bold;
+  font-size: 26px;
+  color: #4a507b;
+
+  margin-top: 12px;
+  margin-bottom: 32px;
+
+  label {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    transition: background 0.5s;
+    font-size: 24px;
+  }
+
+  input[type="radio"] {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    cursor: pointer;
+  }
+
+  input[type="radio"]:checked + label,
+  .Checked + label {
+    background: #43b998;
   }
 `;
 
@@ -119,18 +144,18 @@ export const HeaderOfFooter = styled.div`
     align-items: center;
 
     button {
-      padding: 12px 8px;
+      padding: 12px 2px;
       border: 0;
       background-color: transparent;
 
       img {
-        width: 16px;
-        height: 24px;
+        margin-bottom: 8px;
       }
     }
 
     h1 {
-      margin: 12px 8px 0 8px;
+      color: #00a6ce;
+      margin: 12px 4px 0 4px;
     }
   }
 `;

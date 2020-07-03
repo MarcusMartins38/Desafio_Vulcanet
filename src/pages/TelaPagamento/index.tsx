@@ -1,10 +1,17 @@
-import React from "react";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+  ChangeEvent,
+} from "react";
 
 import {
   Container,
   Content,
   ContentCard,
   TitleDiv,
+  InputRadio,
   InfoDiv,
   HeaderOfFooter,
   FooterContainer,
@@ -17,122 +24,97 @@ import RightArrow from "../../assets/RightArrow.svg";
 import LeftArrow from "../../assets/LeftArrow.svg";
 // import Footer from "../../components/Footer";
 
+import api from "../../services/api";
+
+interface ApiProps {
+  id: number;
+  name: string;
+  description: string;
+  prices: {
+    monthly: number;
+    yearly: number;
+  };
+  features: string[];
+}
+
 const TelaPagamento: React.FC = () => {
+  const [apiInfos, setApiInfos] = useState<ApiProps[]>([]);
+  const [selectedOption, setSelectedOption] = useState<ApiProps>();
+
+  const [countAtendentes, setCountAtendentes] = useState(0);
+
+  useEffect(() => {
+    api.get("plans").then((response) => {
+      setApiInfos(response.data);
+      setSelectedOption(response.data[1]);
+    });
+  }, []);
+
+  const handleIncrementRightArrow = useCallback(() => {
+    setCountAtendentes(countAtendentes + 1);
+  }, [countAtendentes]);
+
+  const handleDecrementLeftArrow = useCallback(() => {
+    if (countAtendentes > 0) {
+      setCountAtendentes(countAtendentes - 1);
+    } else {
+      return;
+    }
+  }, [countAtendentes]);
+
+  const handleSelect = useCallback(
+    (position: number) => {
+      setSelectedOption(apiInfos[position - 1]);
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [selectedOption]
+  );
+
+  const pricesCalculated = useMemo(() => {
+    if (selectedOption === undefined) {
+      return;
+    }
+
+    const price = selectedOption?.prices.monthly + countAtendentes * 130;
+    return price;
+  }, [countAtendentes, selectedOption]);
+
   return (
     <Container>
       <button>TelaPagamento</button>
 
       <Content>
-        <ContentCard>
-          <TitleDiv>
-            <img src={BallonChat} alt="BallonChat" />
-            <h1>Plano 1.0</h1>
-          </TitleDiv>
+        {apiInfos.map((api) => (
+          <ContentCard key={api.id}>
+            <TitleDiv>
+              <img src={BallonChat} alt="BallonChat" />
+              <h1> {api.name}</h1>
+            </TitleDiv>
 
-          <p>Perfeito para experimentar o peçaZap </p>
+            <p>{api.description}</p>
 
-          <h1>R$150/mês</h1>
+            {/* <h1>R$150/mês</h1> */}
+            <h1>R${api.prices.monthly}/mês</h1>
 
-          <button>Selecionar</button>
-          <InfoDiv>
-            <img src={Check} alt="Check" />
-            <p>Até 1000 clientes</p>
-          </InfoDiv>
+            <InputRadio className="divPai">
+              <input
+                type="radio"
+                name="option"
+                value="Selecionar"
+                onChange={() => handleSelect(api.id)}
+                defaultChecked={api.id === 2 ? true : false}
+              />
+              <label>Selecionar</label>
+            </InputRadio>
 
-          <InfoDiv>
-            <img src={Check} alt="Check" />
-            <p>Até 1000 clientes</p>
-          </InfoDiv>
-
-          <InfoDiv>
-            <img src={Check} alt="Check" />
-            <p>Até 1000 clientes</p>
-          </InfoDiv>
-
-          <InfoDiv>
-            <img src={Check} alt="Check" />
-            <p>Até 1000 clientes</p>
-          </InfoDiv>
-
-          <InfoDiv>
-            <img src={Check} alt="Check" />
-            <p>Até 1000 clientes</p>
-          </InfoDiv>
-        </ContentCard>
-
-        <ContentCard>
-          <TitleDiv>
-            <img src={BallonChat} alt="BallonChat" />
-            <h1>Plano 1.0</h1>
-          </TitleDiv>
-
-          <p>Perfeito para experimentar o peçaZap </p>
-
-          <h1>R$150/mês</h1>
-
-          <button>Selecionar</button>
-          <InfoDiv>
-            <img src={Check} alt="Check" />
-            <p>Até 1000 clientes</p>
-          </InfoDiv>
-
-          <InfoDiv>
-            <img src={Check} alt="Check" />
-            <p>Até 1000 clientes</p>
-          </InfoDiv>
-
-          <InfoDiv>
-            <img src={Check} alt="Check" />
-            <p>Até 1000 clientes</p>
-          </InfoDiv>
-
-          <InfoDiv>
-            <img src={Check} alt="Check" />
-            <p>Até 1000 clientes</p>
-          </InfoDiv>
-
-          <InfoDiv>
-            <img src={Check} alt="Check" />
-            <p>Até 1000 clientes</p>
-          </InfoDiv>
-        </ContentCard>
-
-        <ContentCard>
-          <TitleDiv>
-            <img src={BallonChat} alt="BallonChat" />
-            <h1>Plano 1.0</h1>
-          </TitleDiv>
-
-          <p>Perfeito para experimentar o peçaZap </p>
-
-          <h1>R$150/mês</h1>
-
-          <button>Selecionar</button>
-          <InfoDiv>
-            <img src={Check} alt="Check" />
-            <p>Até 1000 clientes</p>
-          </InfoDiv>
-
-          <InfoDiv>
-            <img src={Check} alt="Check" />
-            <p>Até 1000 clientes</p>
-          </InfoDiv>
-
-          <InfoDiv>
-            <img src={Check} alt="Check" />
-            <p>Até 1000 clientes</p>
-          </InfoDiv>
-
-          <InfoDiv>
-            <img src={Check} alt="Check" />
-            <p>Até 1000 clientes</p>
-          </InfoDiv>
-
-          <InfoDiv>
-            <img src={Check} alt="Check" />
-            <p>Até 1000 clientes</p>
-          </InfoDiv>
-        </ContentCard>
+            {api.features.map((feature) => (
+              <InfoDiv key={feature}>
+                <img src={Check} alt="Check" />
+                <p>{feature}</p>
+              </InfoDiv>
+            ))}
+          </ContentCard>
+        ))}
       </Content>
 
       <HeaderOfFooter>
@@ -143,11 +125,19 @@ const TelaPagamento: React.FC = () => {
 
         <div>
           <button>
-            <img src={LeftArrow} alt="LeftArrow" />
+            <img
+              src={LeftArrow}
+              alt="LeftArrow"
+              onClick={handleDecrementLeftArrow}
+            />
           </button>
-          <h1>4</h1>
+          <h1>{countAtendentes}</h1>
           <button>
-            <img src={RightArrow} alt="RightArrow" />
+            <img
+              src={RightArrow}
+              alt="RightArrow"
+              onClick={handleIncrementRightArrow}
+            />
           </button>
         </div>
       </HeaderOfFooter>
@@ -155,8 +145,8 @@ const TelaPagamento: React.FC = () => {
       <FooterContainer>
         <FooterContent>
           <div>
-            <h1>Total: R$380/mês</h1>
-            <p>Plano selecionado: Plano 1.0 - Mensal</p>
+            <h1>Total: R${pricesCalculated}/mês</h1>
+            <p>Plano selecionado: {selectedOption?.name}</p>
           </div>
 
           <button>Contratar</button>

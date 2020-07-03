@@ -6,10 +6,13 @@ export default createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     outline: 0;
+  overflow: hidden;
+
   }
   body {
     background: #FFFFFF;
     -webkit-font-smoothing: antialiased;
+    font-family: 'Lato', serif;
   }
   body , button , input {
     font-size: 16px;
