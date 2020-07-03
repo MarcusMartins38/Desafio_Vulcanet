@@ -17,7 +17,6 @@ import BallonChat from "../../assets/BallonChat.svg";
 import Check from "../../assets/Check.svg";
 import RightArrow from "../../assets/RightArrow.svg";
 import LeftArrow from "../../assets/LeftArrow.svg";
-// import Footer from "../../components/Footer";
 
 import api from "../../services/api";
 
@@ -108,7 +107,6 @@ const TelaPagamento: React.FC = () => {
 
             <p>{api.description}</p>
 
-            {/* <h1>R$150/mês</h1> */}
             <h1>
               R$
               {toggleButton === false ? api.prices.monthly : api.prices.yearly}
