@@ -9,7 +9,7 @@ export const Container = styled.div`
   border-radius: 15px;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
 
-  margin: 65px auto;
+  margin: 65px auto 0 auto;
 
   overflow: hidden;
 
@@ -206,7 +206,7 @@ export const HeaderOfFooter = styled.div`
 export const FooterContainer = styled.div`
   width: 100%;
   height: 100%;
-  max-height: 120px;
+  height: 120px;
 
   position: absolute;
   bottom: 0;

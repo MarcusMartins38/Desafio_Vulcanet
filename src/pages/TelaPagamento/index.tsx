@@ -65,8 +65,7 @@ const TelaPagamento: React.FC = () => {
     (position: number) => {
       setSelectedOption(apiInfos[position - 1]);
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [selectedOption]
+    [apiInfos]
   );
 
   const pricesCalculated = useMemo(() => {
@@ -84,7 +83,7 @@ const TelaPagamento: React.FC = () => {
   }, [countAtendentes, selectedOption, toggleButton]);
 
   const handleToggleButton = useCallback(() => {
-    if (toggleButton == false) {
+    if (toggleButton === false) {
       setToggleButton(true);
     } else {
       setToggleButton(false);
