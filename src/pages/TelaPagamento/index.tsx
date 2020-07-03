@@ -1,13 +1,8 @@
-import React, {
-  useState,
-  useEffect,
-  useCallback,
-  useMemo,
-  ChangeEvent,
-} from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 
 import {
   Container,
+  DivToggle,
   Content,
   ContentCard,
   TitleDiv,
@@ -43,6 +38,8 @@ const TelaPagamento: React.FC = () => {
 
   const [countAtendentes, setCountAtendentes] = useState(0);
 
+  const [toggleButton, setToggleButton] = useState(false);
+
   useEffect(() => {
     api.get("plans").then((response) => {
       setApiInfos(response.data);
@@ -75,13 +72,31 @@ const TelaPagamento: React.FC = () => {
       return;
     }
 
-    const price = selectedOption?.prices.monthly + countAtendentes * 130;
-    return price;
-  }, [countAtendentes, selectedOption]);
+    if (toggleButton === false) {
+      const price = selectedOption?.prices.monthly + countAtendentes * 130;
+      return price;
+    } else {
+      const price = selectedOption?.prices.yearly + countAtendentes * 130;
+      return price;
+    }
+  }, [countAtendentes, selectedOption, toggleButton]);
+
+  const handleToggleButton = useCallback(() => {
+    if (toggleButton == false) {
+      setToggleButton(true);
+    } else {
+      setToggleButton(false);
+    }
+  }, [toggleButton]);
 
   return (
     <Container>
-      <button>TelaPagamento</button>
+      <DivToggle>
+        <button onClick={() => handleToggleButton()}>
+          <div className={toggleButton === false ? "Active" : ""}>Mensal</div>
+          <div className={toggleButton === true ? "Active" : ""}>Anual</div>
+        </button>
+      </DivToggle>
 
       <Content>
         {apiInfos.map((api) => (
@@ -94,7 +109,11 @@ const TelaPagamento: React.FC = () => {
             <p>{api.description}</p>
 
             {/* <h1>R$150/mês</h1> */}
-            <h1>R${api.prices.monthly}/mês</h1>
+            <h1>
+              R$
+              {toggleButton === false ? api.prices.monthly : api.prices.yearly}
+              /mês
+            </h1>
 
             <InputRadio className="divPai">
               <input
@@ -146,7 +165,10 @@ const TelaPagamento: React.FC = () => {
         <FooterContent>
           <div>
             <h1>Total: R${pricesCalculated}/mês</h1>
-            <p>Plano selecionado: {selectedOption?.name}</p>
+            <p>
+              Plano selecionado: {selectedOption?.name} -{" "}
+              {toggleButton === false ? "Mensal" : "Anual"}
+            </p>
           </div>
 
           <button>Contratar</button>

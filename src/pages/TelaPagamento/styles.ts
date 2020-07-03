@@ -19,6 +19,45 @@ export const Container = styled.div`
   }
 `;
 
+export const DivToggle = styled.div`
+  button {
+    position: relative;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+
+    background: #f4f7fc;
+    border-radius: 100px;
+
+    margin-top: 12px;
+    position: relative;
+
+    width: 220px;
+    height: 38px;
+    border: 0;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
+
+    div {
+      border: 2px solid #ffffff;
+      background-color: #ffffff;
+      border-radius: 100px;
+      width: 50%;
+      padding: 7.6px 0;
+
+      font-size: 13px;
+      font-family: "Lato", serif;
+      font-weight: bold;
+    }
+
+    .Active {
+      border: 2px solid #00a6ce;
+      background-color: #00a6ce;
+
+      color: white;
+    }
+  }
+`;
+
 export const Content = styled.div`
   display: flex;
 `;
@@ -106,6 +145,7 @@ export const InputRadio = styled.div`
   input[type="radio"]:checked + label,
   .Checked + label {
     background: #43b998;
+    color: white;
   }
 `;
 
@@ -117,7 +157,7 @@ export const InfoDiv = styled.div`
 
 export const HeaderOfFooter = styled.div`
   display: flex;
-  margin-top: 60px;
+  margin-top: 45px;
   margin-left: 12px;
   margin-bottom: 122px;
 
@@ -131,6 +171,7 @@ export const HeaderOfFooter = styled.div`
       font-weight: normal;
       font-size: 36px;
       color: #222222;
+      font-weight: 500;
     }
 
     p {
@@ -156,6 +197,8 @@ export const HeaderOfFooter = styled.div`
     h1 {
       color: #00a6ce;
       margin: 12px 4px 0 4px;
+      font-family: "Lato";
+      font-weight: 500;
     }
   }
 `;
