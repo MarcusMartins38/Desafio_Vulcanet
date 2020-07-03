@@ -8,12 +8,14 @@ export default createGlobalStyle`
     outline: 0;
   }
   body {
-    background: #E5E5E5;
+    background: #FFFFFF;
     -webkit-font-smoothing: antialiased;
   }
   body , button , input {
     font-size: 16px;
   }
+
+ 
 
   button {
     cursor: pointer;
