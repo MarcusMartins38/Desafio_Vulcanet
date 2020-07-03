@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import {
   Container,
   DivToggle,
@@ -169,9 +172,12 @@ const TelaPagamento: React.FC = () => {
             </p>
           </div>
 
-          <button>Contratar</button>
+          <button onClick={() => toast("Compra efetuada com sucesso!")}>
+            Contratar
+          </button>
         </FooterContent>
       </FooterContainer>
+      <ToastContainer />
     </Container>
   );
 };
