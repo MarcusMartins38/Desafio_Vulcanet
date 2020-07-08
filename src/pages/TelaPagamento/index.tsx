@@ -11,6 +11,7 @@ import {
   InputRadio,
   InfoDiv,
   NumberOfAttendants,
+  SpinnerCss,
 } from "./styles";
 
 import BallonChat from "../../assets/BallonChat.svg";
@@ -21,7 +22,6 @@ import LeftArrow from "../../assets/LeftArrow.svg";
 import api from "../../services/api";
 
 import MoonLoader from "react-spinners/MoonLoader";
-import { css } from "@emotion/core";
 
 import Footer from "../../components/Footer";
 
@@ -45,13 +45,6 @@ const TelaPagamento: React.FC = () => {
   const [countAtendentes, setCountAtendentes] = useState(0);
 
   const [toggleButton, setToggleButton] = useState(false);
-
-  const override = css`
-    display: block;
-    margin: 0 auto;
-    border-color: red;
-    margin-top: 30%;
-  `;
 
   useEffect(() => {
     setLoading(true);
@@ -107,7 +100,7 @@ const TelaPagamento: React.FC = () => {
     <Container>
       {loading ? (
         <div>
-          <MoonLoader css={override} size={64} color={"#00A6CE"} />
+          <MoonLoader css={SpinnerCss} size={64} color={"#00A6CE"} />
         </div>
       ) : (
         <>

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { css } from "@emotion/core";
 
 export const Container = styled.div`
   width: 1150px;
@@ -206,4 +207,11 @@ export const NumberOfAttendants = styled.div`
       font-weight: 500;
     }
   }
+`;
+
+export const SpinnerCss = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+  margin-top: 30%;
 `;
