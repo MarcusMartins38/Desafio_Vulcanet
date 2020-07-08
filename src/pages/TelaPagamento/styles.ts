@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 1150px;
-  height: 823px;
+  min-height: 823px;
   position: relative;
 
   background-color: #ffffff;
@@ -65,6 +65,7 @@ export const Content = styled.div`
 export const ContentCard = styled.div`
   width: 390px;
   height: 550px;
+  min-height: 100%;
   border-right: 1px solid #dddddd;
 
   margin-top: 28px;
