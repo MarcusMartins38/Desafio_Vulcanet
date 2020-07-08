@@ -10,7 +10,7 @@ import {
   TitleDiv,
   InputRadio,
   InfoDiv,
-  HeaderOfFooter,
+  NumberOfAttendants,
 } from "./styles";
 
 import BallonChat from "../../assets/BallonChat.svg";
@@ -159,7 +159,7 @@ const TelaPagamento: React.FC = () => {
             ))}
           </Content>
 
-          <HeaderOfFooter>
+          <NumberOfAttendants>
             <div>
               <strong>Atendentes</strong>
               <p>+R$130/mês por atendente</p>
@@ -182,7 +182,7 @@ const TelaPagamento: React.FC = () => {
                 />
               </button>
             </div>
-          </HeaderOfFooter>
+          </NumberOfAttendants>
 
           <Footer
             toggleButton={toggleButton}
