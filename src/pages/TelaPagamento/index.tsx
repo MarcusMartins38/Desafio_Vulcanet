@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import {
@@ -12,8 +11,6 @@ import {
   InputRadio,
   InfoDiv,
   HeaderOfFooter,
-  FooterContainer,
-  FooterContent,
 } from "./styles";
 
 import BallonChat from "../../assets/BallonChat.svg";
@@ -25,6 +22,8 @@ import api from "../../services/api";
 
 import MoonLoader from "react-spinners/MoonLoader";
 import { css } from "@emotion/core";
+
+import Footer from "../../components/Footer";
 
 interface ApiProps {
   id: number;
@@ -185,22 +184,10 @@ const TelaPagamento: React.FC = () => {
             </div>
           </HeaderOfFooter>
 
-          <FooterContainer>
-            <FooterContent>
-              <div>
-                <h1>Total: R${pricesCalculated}/mês</h1>
-                <p>
-                  Plano selecionado: {selectedOption?.name} -{" "}
-                  {toggleButton === false ? "Mensal" : "Anual"}
-                </p>
-              </div>
-
-              <button onClick={() => toast("Compra efetuada com sucesso!")}>
-                Contratar
-              </button>
-            </FooterContent>
-          </FooterContainer>
-          <ToastContainer />
+          <Footer
+            toggleButton={toggleButton}
+            pricesCalculated={pricesCalculated}
+          />
         </>
       )}
     </Container>
